@@ -1,76 +1,57 @@
-# House-Price-Prediction-and-Data-Cleaning
-Machine Learning data preprocessing pipeline for Bengaluru house price prediction. Cleans raw housing dataset, handles missing values, processes total square footage, removes outliers, and saves a clean dataset for further modeling. Includes exploratory analysis and visualizations.
-### video number 1 machine learning project
-import pandas as pd
-import numpy as np
-from matplotlib import pyplot as plt
-%matplotlib inline
-import matplotlib
-matplotlib.rcParams["figure.figsize"] = (20,10)
+House Price Prediction - Data Cleaning and Preprocessing
+Overview
+This project is the first step in a machine learning pipeline for predicting house prices in Bengaluru, India. It focuses on data cleaning and preprocessing of a real-world dataset containing property details. The goal is to prepare the dataset for building accurate price prediction models by handling missing values, converting data types, and creating new features.
 
-df1 = pd.read_csv(r"C:\Users\muham\OneDrive\Desktop\BHP\Bengaluru_House_Data.csv")
-df1.head()
+This project is part of a video tutorial series on machine learning projects.
 
-df1.shape
+Features
+Loads the Bengaluru house price dataset.
 
-df1.groupby('area_type')['area_type'].agg('count')
+Performs exploratory data analysis (EDA) to understand data distribution.
 
-df2 = df1.drop(['availability','balcony','area_type','society'],axis='columns')
-df2.head()
+Cleans the data by dropping irrelevant columns and handling missing values.
 
-df2.isnull().sum()
+Extracts new features such as the number of bedrooms (BHK) from textual data.
 
-df3 = df2.dropna()
-df3.isnull().sum()
+Converts property size ranges into single numeric values for consistent analysis.
 
-df3.shape
+Identifies and removes outliers and erroneous data.
 
-df3['size'].unique()
+Visualizes data distributions to aid understanding.
 
-df3['bhk'] = df3['size'].apply(lambda x: int(x.split(' ')[0]))
+Saves the cleaned dataset for downstream machine learning tasks.
 
-df3.head()
+How It Works
+The script reads the raw dataset from a CSV file.
 
-df3['bhk'].unique()
+It drops columns that are not useful for price prediction.
 
-df3[df3.bhk>20]
+Missing values are removed to ensure data quality.
 
-df.total_sqft.unique()
+The 'size' column is processed to extract the number of bedrooms (BHK).
 
-def is_float(x):
-   try:
-       float(x)
-   except:
-       return False
-   return True
+The 'total_sqft' column, which sometimes contains ranges (e.g., "2100-2850"), is converted into an average numeric value.
 
-df3[~df3['total_sqft'].apply(is_float)].head(10)
+Data with invalid or inconsistent size entries are removed.
 
+A histogram of the BHK distribution is plotted to visualize the dataset.
 
-def convert_sqft_to_num(x):
-    tokens = x.split('-')
-    if len(tokens) == 2:
-        return (float(tokens[0])+float(tokens[1]))/2
-    try:
-        return float(x)
-    except:
-        return None
+Finally, the cleaned dataset is saved as a new CSV file for further use.
 
-convert_sqft_to_num('2166')
+Requirements
+Python 3.6 or higher
 
+pandas
 
-convert_sqft_to_num('34.46Sq. Meter')
+numpy
 
+matplotlib
 
-df4 = df3.copy()
-df4['total_sqft'] = df4['total_sqft'].apply(convert_sqft_to_num)
-df.head(10)
+Jupyter Notebook or any Python IDE (optional for running interactively)
 
+You can install the required packages via pip:
 
-
-
-
-
-
-
-
+bash
+Copy
+Edit
+pip install pandas numpy matplotlib
