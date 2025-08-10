@@ -1,3 +1,4 @@
+Source Data file- https://www.kaggle.com/datasets/amitabhajoy/bengaluru-house-price-data
 House Price Prediction - Data Cleaning and Preprocessing
 Overview
 This project is the first step in a machine learning pipeline for predicting house prices in Bengaluru, India. It focuses on data cleaning and preprocessing of a real-world dataset containing property details. The goal is to prepare the dataset for building accurate price prediction models by handling missing values, converting data types, and creating new features.
